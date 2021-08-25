@@ -23,6 +23,5 @@ namespace Alura.Lista.Leitura
         {
             Console.WriteLine(lista);
         }
-
     }
 }
