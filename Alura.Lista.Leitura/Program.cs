@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Alura.Lista.Leitura.Repositorio;
+using Alura.Lista.Leitura.Negocio;
 
 namespace Alura.Lista.Leitura
 {
@@ -13,14 +9,20 @@ namespace Alura.Lista.Leitura
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var _repo = new LivroRepositorioCSV();
+
+            IWebHost host = new WebHostBuilder().UseKestrel().UseStartup<Startup>().Build();
+            host.Run();
+
+            //ImprimeLista(_repo.ParaLer);
+            //ImprimeLista(_repo.Lendo);
+            //ImprimeLista(_repo.Lidos);
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        static void ImprimeLista(ListaDeLeitura lista)
+        {
+            Console.WriteLine(lista);
+        }
+
     }
 }
