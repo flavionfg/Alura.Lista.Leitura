@@ -14,9 +14,9 @@ namespace Alura.Lista.Leitura
             IWebHost host = new WebHostBuilder().UseKestrel().UseStartup<Startup>().Build();
             host.Run();
 
-            //ImprimeLista(_repo.ParaLer);
-            //ImprimeLista(_repo.Lendo);
-            //ImprimeLista(_repo.Lidos);
+            ImprimeLista(_repo.ParaLer);
+            ImprimeLista(_repo.Lendo);
+            ImprimeLista(_repo.Lidos);
         }
 
         static void ImprimeLista(ListaDeLeitura lista)
