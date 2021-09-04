@@ -10,7 +10,6 @@ using Alura.Lista.Leitura.Negocio;
 using System.Linq;
 using System.IO;
 
-
 namespace Alura.Lista.Leitura
 {
     public class Startup
@@ -18,9 +17,7 @@ namespace Alura.Lista.Leitura
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddRouting();
-
         }
 
         public void Configure(IApplicationBuilder app)
@@ -53,7 +50,6 @@ namespace Alura.Lista.Leitura
             var repo = new LivroRepositorioCSV();
             repo.Incluir(livro);
             return context.Response.WriteAsync("O Livro foi adicionado com sucesso");
-
         }
 
         private Task ExibeFormulario(HttpContext context)
@@ -112,7 +108,7 @@ namespace Alura.Lista.Leitura
             return context.Response.WriteAsync("Caminho inexistente.");
         }
 
-        public Task LivrosParaLer(HttpContext contexto)
+        public Task LivrosParaLer(HttpContext context)
         {
             var _repo = new LivroRepositorioCSV();
             var conteudoArquivo = CarregaArquivoHTML("para-ler");
@@ -124,19 +120,39 @@ namespace Alura.Lista.Leitura
             }
             conteudoArquivo = conteudoArquivo.Replace("#NOVO-ITEM#", "");
 
-            return contexto.Response.WriteAsync(conteudoArquivo);
+            return context.Response.WriteAsync(conteudoArquivo);
         }
 
-        public Task LivrosLendo(HttpContext contexto)
+        public Task LivrosLendo(HttpContext context)
         {
             var _repo = new LivroRepositorioCSV();
-            return contexto.Response.WriteAsync(_repo.Lendo.ToString());
+            var conteudoArquivo = CarregaArquivoHTML("lendo");
+
+            foreach (var livro in _repo.Lendo.Livros)
+            {
+                conteudoArquivo = conteudoArquivo
+                    .Replace("#LENDO#", $"<li>{livro.Titulo} - {livro.Autor}</li>#LENDO#");
+            }
+
+            conteudoArquivo = conteudoArquivo.Replace("#LENDO#", "");
+
+            return context.Response.WriteAsync(conteudoArquivo);
         }
 
-        public Task LivrosLidos(HttpContext contexto)
+        public Task LivrosLidos(HttpContext context)
         {
             var _repo = new LivroRepositorioCSV();
-            return contexto.Response.WriteAsync(_repo.Lidos.ToString());
+            var conteudoArquivo = CarregaArquivoHTML("lidos");
+
+            foreach(var livro in _repo.Lidos.Livros)
+            {
+                conteudoArquivo = conteudoArquivo
+                    .Replace("#LIDOS#", $"<li>{livro.Titulo} - {livro.Autor}</li>#LIDOS#");
+            }
+
+            conteudoArquivo = conteudoArquivo.Replace("#LIDOS#", "");
+
+            return context.Response.WriteAsync(conteudoArquivo);
         }
     }
 }
