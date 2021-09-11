@@ -16,7 +16,7 @@ namespace Alura.Lista.Leitura
 {
     public class CadastroLogica
     {
-        public static Task ProcessaFormulario(HttpContext context)
+        public static Task Incluir(HttpContext context)
         {
 
             var livro = new Livro()
@@ -36,7 +36,7 @@ namespace Alura.Lista.Leitura
             return context.Response.WriteAsync(html);
         }
 
-        public static Task NovoLivroParaLer(HttpContext context)
+        public static Task NovoLivro(HttpContext context)
         {
             var livro = new Livro()
             {
