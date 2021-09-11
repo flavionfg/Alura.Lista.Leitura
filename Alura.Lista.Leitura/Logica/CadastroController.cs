@@ -14,7 +14,7 @@ using Alura.Lista.Leitura.HTML;
 
 namespace Alura.Lista.Leitura
 {
-    public class CadastroLogica
+    public class CadastroController
     {
         public static Task Incluir(HttpContext context)
         {

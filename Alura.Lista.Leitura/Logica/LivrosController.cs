@@ -11,7 +11,7 @@ using Alura.Lista.Leitura.HTML;
 
 namespace Alura.Lista.Leitura.App
 {
-    public class LivrosLogica
+    public class LivrosController
     {
         private static string CarregaLista(IEnumerable<Livro> livros)
         {
@@ -52,6 +52,11 @@ namespace Alura.Lista.Leitura.App
             var repo = new LivroRepositorioCSV();
             var livro = repo.Todos.First(l => l.Id == id);
             return context.Response.WriteAsync(livro.Detalhes());
+        }
+
+        public string Teste()
+        {
+            return "nova funcionalidade implementada!";
         }
     }
 }
