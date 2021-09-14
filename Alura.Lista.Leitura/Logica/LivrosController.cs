@@ -46,12 +46,11 @@ namespace Alura.Lista.Leitura.App
         }
 
 
-        public static Task Detalhes(HttpContext context)
+        public string Detalhes(int id)
         {
-            int id = Convert.ToInt32(context.GetRouteValue("id"));
             var repo = new LivroRepositorioCSV();
             var livro = repo.Todos.First(l => l.Id == id);
-            return context.Response.WriteAsync(livro.Detalhes());
+            return livro.Detalhes();
         }
 
         public string Teste()
