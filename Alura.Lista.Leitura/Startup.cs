@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using Alura.Lista.Leitura.Mvc;
 
 namespace Alura.Lista.Leitura
 {

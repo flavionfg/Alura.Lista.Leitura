@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alura.Lista.Leitura.Repositorio;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Alura.Lista.Leitura.Repositorio;
 using Alura.Lista.Leitura.Negocio;
-using Alura.Lista.Leitura;
-using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using Alura.Lista.Leitura.HTML;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Alura.Lista.Leitura
 {
@@ -22,11 +20,11 @@ namespace Alura.Lista.Leitura
             repo.Incluir(livro);
             return "O Livro foi adicionado com sucesso";
         }
-
-        public static Task ExibeFormulario(HttpContext context)
+        public IActionResult ExibeFormulario()
         {
-            var html = HtmlUtils.CarregaArquivoHTML("formulario");
-            return context.Response.WriteAsync(html);
+            //var html = HtmlUtils.CarregaArquivoHTML("formulario");
+            var html = new ViewResult { ViewName = "formulario.html" };
+            return html;
         }
     }
 }
