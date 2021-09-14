@@ -13,6 +13,7 @@ namespace Alura.Lista.Leitura
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseDeveloperExceptionPage();
             app.UseMvcWithDefaultRoute();
         }
     }
