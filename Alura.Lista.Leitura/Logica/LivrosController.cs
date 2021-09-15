@@ -12,8 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Alura.Lista.Leitura.App
 {
-    public class LivrosController
+    public class LivrosController : Controller
     {
+        public IEnumerable<Livro> Livros { get; set; }
+
         private static string CarregaLista(IEnumerable<Livro> livros)
         {
             var conteudoArquivo = HtmlUtils.CarregaArquivoHTML("lista");
@@ -28,23 +30,22 @@ namespace Alura.Lista.Leitura.App
         public IActionResult ParaLer()
         {
             var _repo = new LivroRepositorioCSV();
-            //var html = CarregaLista(_repo.ParaLer.Livros);
-            var html = new ViewResult { ViewName = "para-ler" };
-            return html;
+            ViewBag.Livros = _repo.ParaLer.Livros;
+            return View("lista");
         }
 
-        public static Task Lidos(HttpContext context)
+        public IActionResult Lidos()
         {
             var _repo = new LivroRepositorioCSV();
-            var html = CarregaLista(_repo.Lidos.Livros);
-            return context.Response.WriteAsync(html);
+            ViewBag.Livros = _repo.Lendo.Livros;
+            return View("lista");
         }
 
-        public static Task Lendo(HttpContext context)
+        public IActionResult Lendo()
         {
             var _repo = new LivroRepositorioCSV();
-            var html = CarregaLista(_repo.Lendo.Livros);
-            return context.Response.WriteAsync(html);
+            ViewBag.Livros = _repo.Lendo.Livros;
+            return View("lista");
         }
 
         public string Detalhes(int id)
